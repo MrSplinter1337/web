@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Приложение для обработки изображений</title>
+</head>
+<body>
+    <h1>Приложение для обработки изображений</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="image">Выберите изображение:</label><br>
+        <input type="file" name="image" id="image" required><br><br>
+
+        <label for="intensity">Коэффициент интенсивности (0.0 - 2.0):</label><br>
+        <input type="number" name="intensity" id="intensity" step="0.1" min="0.0" max="2.0" required><br><br>
+
+        <img src="data:image/png;base64,{{ captcha_image }}" alt="Капча"><br>
+        <label for="captcha">Введите капчу:</label><br>
+        <input type="text" name="captcha" id="captcha" required><br><br>
+        <input type="hidden" name="session_captcha" value="{{ session_captcha }}">
+
+        <input type="submit" value="Загрузить и обработать">
+    </form>
+
+    {% if original_image %}
+    <h2>Оригинальное изображение</h2>
+    <img src="{{ url_for('static', filename='uploads/' + original_image) }}" alt="Оригинальное изображение">
+    <h2>Улучшенное изображение</h2>
+    <img src="{{ url_for('static', filename='uploads/' + enhanced_image) }}" alt="Улучшенное изображение">
+    <h2>Оригинальная гистограмма</h2>
+    <img src="data:image/png;base64,{{ original_histogram }}" alt="Оригинальная гистограмма">
+    <h2>Улучшенная гистограмма</h2>
+    <img src="data:image/png;base64,{{ enhanced_histogram }}" alt="Улучшенная гистограмма">
+    {% endif %}
+
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
