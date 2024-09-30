@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, session
+from flask import Flask, request, render_template, session
 from PIL import Image, ImageEnhance
 import matplotlib.pyplot as plt
 import os
@@ -114,4 +114,4 @@ def generate_captcha():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))

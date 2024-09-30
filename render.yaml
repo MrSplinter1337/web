@@ -1,6 +1,9 @@
 services:
   - type: web
-    name: my-web-service
+    name: web
     env: python
+    envVars:
+      - key: SECRET_KEY
+        value: 'your_secret_key_here'
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app --workers 1"
+    startCommand: "gunicorn app:app --workers 3"
