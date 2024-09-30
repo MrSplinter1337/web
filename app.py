@@ -115,4 +115,5 @@ def generate_captcha():
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # Получаем порт из переменной окружения или используем 5000 по умолчанию
+    print(f"Starting app on port {port}")  # Выводим назначенный порт
     app.run(host="0.0.0.0", port=port)
